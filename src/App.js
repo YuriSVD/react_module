@@ -1,11 +1,14 @@
 import './App.css';
+import UserForm from "./components/UserForm/UserForm";
 import Cars from "./components/Cars/Cars";
-import {useEffect, useState} from "react";
-import {axiosService} from "./services/axios.service";
-import {carsService} from "./services/cars.service";
+import CommentForm from "./components/CommentForm/CommentForm";
 function App() {
     return (
         <div>
+            <UserForm/>
+            <hr/>
+            <CommentForm/>
+            <hr/>
             <Cars/>
         </div>
     );

@@ -1,5 +1,6 @@
 import axios from "axios";
-import {baseURL} from "../configs/urls";
+import {baseURLForCars, baseURLForJSON} from "../configs/urls";
 
-const axiosService = axios.create({baseURL});
-export {axiosService}
+const axiosServiceForCars = axios.create({baseURL: baseURLForCars});
+const axiosServiceForJSON = axios.create({baseURL: baseURLForJSON});
+export {axiosServiceForCars, axiosServiceForJSON}

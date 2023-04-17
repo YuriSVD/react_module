@@ -14,15 +14,14 @@ const CarForm = ({setAllCars, carForUpdate}) => {
         }
     }, [carForUpdate])
     const save = async (car) => {
-        const {data} = await carsService.createCar(car);
+        await carsService.createCar(car);
         setAllCars(prev=>!prev);
         reset();
     }
-    const update = async ({id, car}) => {
-        //let update = await carsService.getById(id);
-
-        const update = await carsService.updateById(car.id, car);
-        console.log(update.data);
+    const update = async (car) => {
+        await carsService.updateById(carForUpdate.id, car);
+        setAllCars(prev=>!prev);
+        reset();
     }
     return (
         <form onSubmit={handleSubmit(carForUpdate?update:save)}>
