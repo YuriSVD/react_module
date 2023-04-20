@@ -14,7 +14,10 @@ const CommentPost = () => {
     return (
         <div>
             {
-                commentPost && JSON.stringify(commentPost)
+                commentPost && <div>
+                    <h4>{commentPost.id} {commentPost.title}</h4>
+                    <p>{commentPost.body}</p>
+                </div>
             }
         </div>
     );

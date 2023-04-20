@@ -14,7 +14,10 @@ const PostDetails = () => {
     return (
         <div>
             {
-                post && JSON.stringify(post)
+                post && <div>
+                <h4>{post.id} {post.title}</h4>
+                <p>{post.body}</p>
+                </div>
             }
         </div>
     );
