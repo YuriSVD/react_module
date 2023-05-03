@@ -1,8 +1,8 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import {userService} from "../../services/user.service";
+import {userService} from "../../services";
 import {joiResolver} from "@hookform/resolvers/joi";
-import {userValidator} from "../../validators/user.validator"
+import {userValidator} from "../../validators"
 const UserForm = () => {
     const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({mode:"all", resolver:joiResolver(userValidator)});
     const submit = async (user) => {

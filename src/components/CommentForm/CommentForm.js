@@ -1,14 +1,16 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import {commentService} from "../../services/comment.service";
 import {joiResolver} from "@hookform/resolvers/joi";
-import {commentValidator} from "../../validators/comment.validator";
+
+import {commentService} from "../../services";
+import {commentValidator} from "../../validators";
 
 const CommentForm = () => {
     const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({mode: "all", resolver:joiResolver(commentValidator)})
     const submit = async (post) => {
+        console.log(post);
         const newPost = await commentService.createPost(post);
-        console.log(newPost.data); // щоб побачити що comment створився
+        //console.log(newPost.data); // щоб побачити що comment створився
         reset()
     }
     return (
@@ -26,4 +28,4 @@ const CommentForm = () => {
     );
 };
 
-export default CommentForm;
+export {CommentForm};

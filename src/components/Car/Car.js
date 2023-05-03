@@ -1,18 +1,22 @@
-import {carsService} from "../../services/cars.service";
-const Car = ({car, setCarForUpdate, setAllCars}) => {
+import {useDispatch} from "react-redux";
+import {carActions} from "../../redux/slices";
+const Car = ({car}) => {
+    const dispatch = useDispatch();
+    const {id, brand, price, year} = car;
     return (
         <div>
-            <div>Id: {car.id}</div>
-            <div>Brand: {car.brand}</div>
-            <div>Prize: {car.price}</div>
-            <div>Year: {car.year}</div>
-            <button onClick={() => setCarForUpdate(car)}>Update</button>
+            <div>Id: {id}</div>
+            <div>Brand: {brand}</div>
+            <div>Price: {price}</div>
+            <div>Year: {year}</div>
+            <button onClick={async () =>{
+                await dispatch(carActions.carForUpdate(car))
+            }}>Update</button>
             <button onClick={async () => {
-                await carsService.deleteById(car.id);
-                setAllCars(prev=>!prev);
+               await dispatch(carActions.deleteCar(car))
             }}>Delete</button>
         </div>
-    );
-};
+    )
+}
 
-export default Car;
+export {Car};

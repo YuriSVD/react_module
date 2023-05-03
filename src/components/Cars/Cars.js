@@ -1,31 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {carsService} from "../../services/cars.service";
-import Car from "../Car/Car";
-import CarForm from "../CarForm/CarForm";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+
+import {carsService} from "../../services";
+import {Car} from "../Car/Car";
+import {carActions} from "../../redux/slices";
+import {CarForm} from "../CarForm/CarForm";
 
 const Cars = () => {
-    const [cars, setCars] = useState([]);
-    const [allCars, setAllCars] = useState(null);
-    const [carForUpdate, setCarForUpdate] = useState(null);
+    const dispatch = useDispatch();
+    const {cars, carForUpdate} = useSelector(state => state.cars);
     useEffect(() => {
-        carsService.getAll()
-            .then(value => value.data)
-            .then(value => setCars(value))
-    }, [allCars])
+        carsService.getAll().then(value => value.data)
+            .then(value => dispatch(carActions.setCars(value)))
+    }, [cars])
     return (
         <div>
-            <CarForm setAllCars={setAllCars}
-                     carForUpdate={carForUpdate}
-            />
+            <CarForm carForUpdate={carForUpdate}/>
             <hr/>
-            {cars.map(car => <Car
-                key={car.id}
-                car={car}
-                setCarForUpdate={setCarForUpdate}
-                setAllCars={setAllCars}
-            />)}
+            {cars.map(car => <Car key={car.id} car={car}/>)}
         </div>
-    );
-};
+    )
+}
 
-export default Cars;
+export {Cars};

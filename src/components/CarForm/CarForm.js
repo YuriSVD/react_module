@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
-import {carsService} from "../../services/cars.service";
 import {joiResolver} from "@hookform/resolvers/joi";
-import {carValidator} from "../../validators/car.validator";
+import {carValidator} from "../../validators";
+import {carActions} from "../../redux/slices";
+import {useDispatch} from "react-redux";
 
-const CarForm = ({setAllCars, carForUpdate}) => {
+const CarForm = ({carForUpdate}) => {
+    const dispatch = useDispatch();
     const {register, handleSubmit, reset, formState: {errors, isValid}, setValue} = useForm({mode:"all", resolver:joiResolver(carValidator)});
     useEffect(() => {
         if (carForUpdate) {
@@ -14,13 +16,12 @@ const CarForm = ({setAllCars, carForUpdate}) => {
         }
     }, [carForUpdate])
     const save = async (car) => {
-        await carsService.createCar(car);
-        setAllCars(prev=>!prev);
+        await dispatch(carActions.saveCar(car));
         reset();
     }
     const update = async (car) => {
-        await carsService.updateById(carForUpdate.id, car);
-        setAllCars(prev=>!prev);
+        console.log(carForUpdate.id);
+        await dispatch(carActions.updateCar({id: carForUpdate.id, car: car}));
         reset();
     }
     return (
@@ -36,4 +37,4 @@ const CarForm = ({setAllCars, carForUpdate}) => {
     );
 };
 
-export default CarForm;
+export {CarForm};

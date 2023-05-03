@@ -1,15 +1,15 @@
 import './App.css';
 import UserForm from "./components/UserForm/UserForm";
-import Cars from "./components/Cars/Cars";
-import CommentForm from "./components/CommentForm/CommentForm";
+import {Cars} from "./components/Cars";
+import {CommentForm} from "./components/CommentForm/CommentForm";
 function App() {
     return (
         <div>
-            <UserForm/>
-            <hr/>
+            {/*<UserForm/>
+            <hr/>*/}
             <CommentForm/>
-            <hr/>
-            <Cars/>
+            {/*<hr/>
+            <Cars/>*/}
         </div>
     );
 }
