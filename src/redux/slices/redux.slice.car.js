@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+
 import {carsService} from "../../services";
 
 const initialState = {
@@ -22,11 +23,9 @@ const carSlice = createSlice({
         },
         carForUpdate: (state, actions) => {
             state.carForUpdate = actions.payload;
-            console.log(state.carForUpdate);
         },
         updateCar: (state, actions) => {
             const car = actions.payload;
-            console.log(car);
             carsService.updateById(car.id, car.car);
         }
     }

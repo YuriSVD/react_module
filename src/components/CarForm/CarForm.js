@@ -1,12 +1,14 @@
 import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {joiResolver} from "@hookform/resolvers/joi";
-import {carValidator} from "../../validators";
-import {carActions} from "../../redux/slices";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
-const CarForm = ({carForUpdate}) => {
+import {carValidator} from "../../validators";
+import {carActions} from "../../redux";
+
+const CarForm = () => {
     const dispatch = useDispatch();
+    const {carForUpdate} = useSelector(state => state.carForUpdate);
     const {register, handleSubmit, reset, formState: {errors, isValid}, setValue} = useForm({mode:"all", resolver:joiResolver(carValidator)});
     useEffect(() => {
         if (carForUpdate) {
@@ -20,7 +22,6 @@ const CarForm = ({carForUpdate}) => {
         reset();
     }
     const update = async (car) => {
-        console.log(carForUpdate.id);
         await dispatch(carActions.updateCar({id: carForUpdate.id, car: car}));
         reset();
     }

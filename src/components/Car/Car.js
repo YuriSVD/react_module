@@ -1,5 +1,6 @@
 import {useDispatch} from "react-redux";
-import {carActions} from "../../redux/slices";
+
+import {carActions} from "../../redux";
 const Car = ({car}) => {
     const dispatch = useDispatch();
     const {id, brand, price, year} = car;

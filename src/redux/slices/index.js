@@ -1,1 +1,1 @@
-export * from "./redux.slice";
+export * from "./redux.slice.car";
